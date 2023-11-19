@@ -1,6 +1,16 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { panel, text } from '@metamask/snaps-ui';
 
+import { schnorr } from '@noble/curves/secp256k1'
+import { bytesToHex } from '@noble/hashes/utils'
+
+export function generatePrivateKey(): string {
+  return bytesToHex(schnorr.utils.randomPrivateKey())
+}
+
+export function getPublicKey(privateKey: string): string {
+  return bytesToHex(schnorr.getPublicKey(privateKey))
+}
 
 async function getFees() {
   const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow');
@@ -26,7 +36,7 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
             type: 'alert',
             content: panel([
               text(`Hello, **${origin}**!`),
-              text(`Current gas fee estimates: `),
+              text(`Current gas fee estimates: ${generatePrivateKey()} `),
             ]),
         },
       });
