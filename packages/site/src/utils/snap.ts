@@ -69,7 +69,7 @@ export const sendHello = async () => {
 export const sendEcho = async () => {
   let event = {
     kind: 1,
-    created_at: 1700362009,
+    created_at: 1700362000,
     tags: [],
     content: 'hello',
     pubkey: '31ef0a4ed090b89bb5d37f937a6ce6abd6335a2e12a831b5de623781f1a39f03',
