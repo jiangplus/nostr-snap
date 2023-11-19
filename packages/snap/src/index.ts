@@ -27,9 +27,9 @@ async function getFees() {
  * @returns The result of `snap_dialog`.
  * @throws If the request method is not valid for this snap.
  */
-export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
+    case 'getkey':
       return snap.request({
         method: 'snap_dialog',
         params: {
@@ -40,6 +40,24 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
             ]),
         },
       });
+    case 'hello':
+      const entropy = await snap.request({
+        method: 'snap_getEntropy',
+        params: {
+          version: 1,
+        },
+      });
+      snap.request({
+        method: 'snap_dialog',
+        params: {
+            type: 'alert',
+            content: panel([
+              text(`Hello, **${origin}**!`),
+              text(`Current gas fee estimates: ${entropy} `),
+            ]),
+        },
+      });
+      return
     default:
       throw new Error('Method not found.');
   }
