@@ -1,13 +1,13 @@
 {
-  "version": "0.1.0",
-  "description": "An example Snap written in TypeScript.",
-  "proposedName": "TypeScript Example",
+  "version": "0.2.0",
+  "description": "MetaMask Snap for Nostr",
+  "proposedName": "Nostr Snap",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "jD8E4o4QOJElmDkQFcIITLrcKyZiR81o+rOnEMGSvOY=",
+    "shasum": "9FSqsNotKTK65r0TQCpunm5VSZ1kV7oNbgDeSflHFs8=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -22,7 +22,8 @@
     "endowment:rpc": {
       "dapps": true,
       "snaps": false
-    }
+    },
+    "endowment:network-access": {}
   },
   "manifestVersion": "0.1"
 }
